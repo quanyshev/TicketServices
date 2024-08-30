@@ -1,66 +1,54 @@
 package com.bek.ticketService;
 
-import com.bek.ticketService.model.Ticket;
-import com.bek.ticketService.model.User;
 import com.bek.ticketService.service.TicketService;
 import com.bek.ticketService.service.UserService;
-
-import java.util.ArrayList;
+import com.bek.ticketService.service.UserTicketService;
 
 public class Main {
 
    public static void main(String[] args) {
-
+       // HIBERNATE check
        UserService userService = new UserService();
 
-       // >> check saveUser method
-//       User user = new User("Abzal");
-//       userService.saveUser(user);
-//       System.out.println(user.getId());
+       // >> check saveUser
+//       User user1 = new User("Bekzat");
+//       userService.saveUser(user1);
+//       System.out.println(user1.getId());
 
-       // >> check getUserById method
-//       User userFromDB = userService.getUserById(2);
-//       System.out.println(userFromDB.toString());
+       // >> check getUserById
+//       User user2 = userService.getUserById(29);
 
-       // >> check deleteUserById method
-       //userService.deleteUserById(14);
+       // >> check deleteUserById
+//        userService.deleteUserById(24);
+
+       UserTicketService userTicketService = new UserTicketService();
+
+       // >> check updateUserAndTicket
+//       User user4 = userService.getUserById(29);
+//       userTicketService.updateUserAndTicket(user4, "Daniyar", 9, Ticket.TicketClass.VEHICLE, Ticket.TicketType.YEAR);
 
        TicketService ticketService = new TicketService();
 
-       // >> check ticket buy method
-//       User user = new User("Serik");
-//       userService.saveUser(user);
-//       ticketService.buyTicket(userFromDB, Ticket.TicketClass.VEHICLE, Ticket.TicketType.YEAR);
+       // >> check saveTicket
+//       User user3 = new User("Bekasyl");
+//       userService.saveUser(user3);
+//       ticketService.buyTicket(user3, Ticket.TicketClass.SUBWAY, Ticket.TicketType.WEEK);
 
-//        >> check getTicketById service
-//       Ticket ticket = ticketService.getTicketByTicketId(7);
-//       System.out.println(ticket);
+       // >> check getTicketById
+//       Ticket ticket1 = ticketService.getTicketByTicketId(8);
+//       System.out.println(ticket1.toString());
 
-       // >> check getTicketByUserId service
-//       ArrayList<Ticket> ticketList = ticketService.getTicketByUserId(11);
-//
-//       for (Ticket t : ticketList) {
+       // >> check getTicketByUserId
+//       ArrayList<Ticket> tickets = ticketService.getTicketByUserId(29);
+//       for (Ticket t : tickets) {
 //           System.out.println(t.toString());
 //       }
 
        // >> check deleteTicketById
-//       ticketService.deleteTicketbyId(2);
-//       ticketService.deleteTicketbyId(3);
+//       ticketService.deleteTicketbyId(6);
 
        // >> check updateTicketType
-//       ticketService.updateTicketType(ticket, Ticket.TicketType.MONTH);
-
-       // >> check updateUserAndTicket transaction method
-//       User u = userService.getUserById(2);
-//       Ticket t = ticketService.getTicketByTicketId(7);
-//
-//       System.out.println(u.toString());
-//       System.out.println(t.toString());
-//
-//       u.setName("Patrik");
-//       t.setType(Ticket.TicketType.YEAR);
-//
-//       userService.updateUserAndTicket(u, t);
-
+//       Ticket ticket = ticketService.getTicketByTicketId(7);
+//       ticketService.updateTicketType(ticket, Ticket.TicketType.DAY);
    }
 }

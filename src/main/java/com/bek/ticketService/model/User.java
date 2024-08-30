@@ -1,4 +1,6 @@
 package com.bek.ticketService.model;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -6,11 +8,19 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "users")
 public class User {
     private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "creation_date")
     private LocalDate startDate = LocalDate.now();
 
+    public User() {
+
+    }
     public User(String name) {
         this.name = name;
     }

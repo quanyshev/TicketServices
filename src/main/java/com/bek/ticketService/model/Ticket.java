@@ -1,4 +1,5 @@
 package com.bek.ticketService.model;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -6,36 +7,32 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "tickets")
 public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int user_id;
-    private TicketType type;
+    @Column(name = "ticket_class")
+    @Enumerated(EnumType.STRING)
     private TicketClass clazz;
+    @Column(name = "ticket_type")
+    @Enumerated(EnumType.STRING)
+    private TicketType type;
+    @Column(name = "creation_date")
     private LocalDate startDate = LocalDate.now();
-
-    public Ticket(User user, TicketClass clazz, TicketType type)  {
-        this.type = type;
-        this.clazz = clazz;
-        this.user_id = user.getId();
-    }
-
-//    public Ticket(int user_id, TicketClass clazz, TicketType type)  {
-//        this.type = type;
-//        this.clazz = clazz;
-//        this.user_id = user_id;
-//    }
-
-
-    public Ticket(int id, int user_id, TicketClass clazz, TicketType type, LocalDate startDate) {
-        this.id = id;
-        this.user_id = user_id;
-        this.type = type;
-        this.clazz = clazz;
-        this.startDate = startDate;
-    }
 
     public enum TicketType {DAY, WEEK, MONTH, YEAR};
     public enum TicketClass {BUS, SUBWAY, VEHICLE};
+
+    public Ticket() {}
+
+    public Ticket(User user, TicketClass clazz, TicketType type)  {
+        this.user_id = user.getId();
+        this.type = type;
+        this.clazz = clazz;
+    }
 
     @Override
     public String toString() {
