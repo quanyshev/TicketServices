@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,10 +18,12 @@ public class User {
     private int id;
     @Column(name = "creation_date")
     private LocalDate startDate = LocalDate.now();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
 
     public User() {
-
     }
+
     public User(String name) {
         this.name = name;
     }
@@ -38,6 +41,9 @@ public class User {
                 ", id=" + id +
                 ", startDate=" + startDate +
                 '}';
+    }
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
     }
 
 }

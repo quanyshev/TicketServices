@@ -13,6 +13,7 @@ public class TicketService {
     public void buyTicket(User user, Ticket.TicketClass ticketClass, Ticket.TicketType ticketType) {
         Ticket ticket = new Ticket(user ,ticketClass, ticketType);
         ticketDAO.saveTicket(ticket);
+        user.addTicket(ticket);
     }
 
     public Ticket getTicketByTicketId(int id) {

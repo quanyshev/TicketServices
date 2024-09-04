@@ -1,19 +1,17 @@
 package com.bek.ticketService.dao;
 
+import com.bek.ticketService.hibernate.SessionFactoryProvider;
 import com.bek.ticketService.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 public class UserDAOImpl implements UserDAO {
-    private final Configuration conf = new Configuration().configure().addAnnotatedClass(User.class);
-    private final SessionFactory sf = conf.buildSessionFactory();
-
+    SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
     @Override
     public void saveUser(User user) {
         Transaction transaction = null;
-        try (Session session = sf.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
@@ -30,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getUserById(int id) {
         User user = null;
-        try (Session session = sf.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             user = session.get(User.class, id);
             System.out.println("User successfully retrieved! ID: " + user.getId());
         } catch (Exception e) {
@@ -42,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void deleteUserById(int id) {
         Transaction transaction = null;
-        try (Session session = sf.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             if (user != null) {

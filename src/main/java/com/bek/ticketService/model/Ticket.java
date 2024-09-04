@@ -13,7 +13,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int user_id;
+//    private int user_id;
     @Column(name = "ticket_class")
     @Enumerated(EnumType.STRING)
     private TicketClass clazz;
@@ -22,6 +22,9 @@ public class Ticket {
     private TicketType type;
     @Column(name = "creation_date")
     private LocalDate startDate = LocalDate.now();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public enum TicketType {DAY, WEEK, MONTH, YEAR};
     public enum TicketClass {BUS, SUBWAY, VEHICLE};
@@ -29,7 +32,7 @@ public class Ticket {
     public Ticket() {}
 
     public Ticket(User user, TicketClass clazz, TicketType type)  {
-        this.user_id = user.getId();
+        this.user = user;
         this.type = type;
         this.clazz = clazz;
     }
@@ -38,7 +41,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", user_id=" + user_id +
+                ", user_id=" + user.getId() +
                 ", type=" + type +
                 ", clazz=" + clazz +
                 ", startDate=" + startDate +
